@@ -1,5 +1,6 @@
 // ignore_for_file: avoid_print
 import 'package:flutter/material.dart';
+import "package:flutter/widgets.dart";
 import "package:net_ninja_course/components/date_format.dart";
 import "package:net_ninja_course/models/expense.dart";
 
@@ -14,6 +15,7 @@ class _NewExpense extends State<NewExpense> {
   final _titleController = TextEditingController();
   final _amountController = TextEditingController();
   DateTime? _pickedDate;
+  dynamic _selectedCategory = Category.leisure;
 
   void _presentDatePicker() async {
     final now = DateTime.now();
@@ -26,6 +28,40 @@ class _NewExpense extends State<NewExpense> {
     setState(() {
       _pickedDate = pickedDate;
     });
+  }
+
+  Future _submitExpenseData() async {
+    final enteredAmount = double.tryParse(_amountController.text);
+    if (_titleController.text.trim().isEmpty ||
+        enteredAmount == null ||
+        enteredAmount <= 0 ||
+        _pickedDate == null) {
+      showDialog(
+          context: context,
+          builder: (ctx) => AlertDialog(
+                title: const Text("Validation"),
+                content: const Text("Please select all fields"),
+                actions: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      TextButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          child: const Text("Close")),
+                      TextButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          child: const Text("Noted"))
+                    ],
+                  )
+                ],
+              ));
+
+      return;
+    }
   }
 
   @override
@@ -76,12 +112,21 @@ class _NewExpense extends State<NewExpense> {
           ),
           Row(
             children: [
-              DropdownButton(
-                  items: Category.values
-                      .map((category) => const DropdownMenuItem(
-                          child: Text(category.name.toString())))
-                      .toList(),
-                  onChanged: () {})
+              Expanded(
+                  child: Expanded(
+                child: DropdownButton(
+                    value: _selectedCategory,
+                    items: Category.values
+                        .map((category) => DropdownMenuItem(
+                            value: category,
+                            child: Text(category.name.toUpperCase())))
+                        .toList(),
+                    onChanged: (dynamic value) {
+                      setState(() {
+                        _selectedCategory = value;
+                      });
+                    }),
+              ))
             ],
           ),
           const SizedBox(
@@ -97,9 +142,7 @@ class _NewExpense extends State<NewExpense> {
                   child: const Text("Cancel")),
               ElevatedButton(
                   onPressed: () {
-                    print(_titleController.text);
-                    print(_amountController.text);
-                    print(_pickedDate);
+                    _submitExpenseData();
                   },
                   child: const Text("Save Expense"))
             ],
