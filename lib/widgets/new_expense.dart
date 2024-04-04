@@ -5,7 +5,9 @@ import "package:net_ninja_course/components/date_format.dart";
 import "package:net_ninja_course/models/expense.dart";
 
 class NewExpense extends StatefulWidget {
-  const NewExpense({super.key});
+  const NewExpense({required this.addExpense, super.key});
+
+  final Future Function(Expense expense) addExpense;
 
   @override
   State<NewExpense> createState() => _NewExpense();

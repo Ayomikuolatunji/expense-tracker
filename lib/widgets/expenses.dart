@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:net_ninja_course/widgets/expenses_lists.dart';
 import "package:net_ninja_course/models/expense.dart";
 import 'package:net_ninja_course/widgets/new_expense.dart';
+
 class Expenses extends StatefulWidget {
   const Expenses({super.key});
 
@@ -29,8 +30,14 @@ class _Expenses extends State<Expenses> {
     showBottomSheet(
         context: context,
         builder: (ctx) {
-          return const NewExpense();
+          return const NewExpense(_addExpense: _addExpense);
         });
+  }
+
+  Future _addExpense(Expense expense) async {
+    setState(() {
+      _registeredExpenses.add(expense);
+    });
   }
 
   @override
