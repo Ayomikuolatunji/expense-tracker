@@ -1,13 +1,12 @@
 // ignore_for_file: avoid_print
 import 'package:flutter/material.dart';
-import "package:flutter/widgets.dart";
 import "package:net_ninja_course/components/date_format.dart";
 import "package:net_ninja_course/models/expense.dart";
 
 class NewExpense extends StatefulWidget {
-  const NewExpense({required this.addExpense, super.key});
+  const NewExpense({required this.onAddExpense, super.key});
 
-  final Future Function(Expense expense) addExpense;
+  final Future Function(Expense expense) onAddExpense;
 
   @override
   State<NewExpense> createState() => _NewExpense();
@@ -64,6 +63,14 @@ class _NewExpense extends State<NewExpense> {
 
       return;
     }
+
+    await widget.onAddExpense(Expense(
+        title: _titleController.text,
+        amount: enteredAmount,
+        date: _pickedDate!,
+        category: _selectedCategory));
+
+    Navigator.pop(context);    
   }
 
   @override
@@ -77,7 +84,7 @@ class _NewExpense extends State<NewExpense> {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 5, vertical: 20),
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.fromLTRB(16, 24, 16, 16),
       child: Column(
         children: [
           TextField(
