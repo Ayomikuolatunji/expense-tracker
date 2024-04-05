@@ -53,7 +53,10 @@ class _Expenses extends State<Expenses> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Expense App"),
+        title: Text(
+          "Expense App",
+          style: Theme.of(context).textTheme.titleLarge,
+        ),
         centerTitle: false,
         actions: [
           IconButton(
