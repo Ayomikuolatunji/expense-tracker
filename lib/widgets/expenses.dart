@@ -28,7 +28,6 @@ class _Expenses extends State<Expenses> {
     setState(() {
       _registeredExpenses.add(expense);
     });
-    print(expense);
   }
 
   void _removeExpense(Expense expense) {
@@ -55,6 +54,7 @@ class _Expenses extends State<Expenses> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Expense App"),
+        centerTitle: false,
         actions: [
           IconButton(
               onPressed: _openAddExpenseOverly, icon: const Icon(Icons.add))
