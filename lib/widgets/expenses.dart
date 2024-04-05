@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:net_ninja_course/widgets/charts/chart.dart';
 import 'package:net_ninja_course/widgets/expenses_lists.dart';
 import "package:net_ninja_course/models/expense.dart";
 import 'package:net_ninja_course/widgets/new_expense.dart';
@@ -65,7 +66,9 @@ class _Expenses extends State<Expenses> {
       ),
       body: Column(
         children: [
-          const Text("The chart"),
+          Chart(
+            expenses: _registeredExpenses,
+          ),
           Expanded(
             child: _registeredExpenses.isEmpty
                 ? const Center(
