@@ -13,7 +13,14 @@ void main() {
         appBarTheme: const AppBarTheme().copyWith(
             backgroundColor: kColorScheme.onPrimaryContainer,
             foregroundColor: kColorScheme.primary,
-            centerTitle: false)),
+            centerTitle: false),
+        cardTheme: const CardTheme().copyWith(
+            color: kColorScheme.secondaryContainer,
+            margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8)),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+            style: ElevatedButton.styleFrom(
+                backgroundColor: kColorScheme.background,
+                foregroundColor: const Color.fromARGB(255, 255, 255, 255)))),
     home: const Scaffold(
       body: Expenses(),
     ),
