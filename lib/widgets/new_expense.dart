@@ -119,6 +119,7 @@ class _NewExpense extends State<NewExpense> {
               ))
             ],
           ),
+         const SizedBox(height: 30,),
           Row(
             children: [
               Expanded(

@@ -54,9 +54,9 @@ class _Expenses extends State<Expenses> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           "Expense App",
-          style: Theme.of(context).textTheme.titleLarge,
+          style: TextStyle(color: Colors.white),
         ),
         centerTitle: false,
         actions: [
@@ -66,8 +66,11 @@ class _Expenses extends State<Expenses> {
       ),
       body: Column(
         children: [
-          Chart(
-            expenses: _registeredExpenses,
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            child: Chart(
+              expenses: _registeredExpenses,
+            ),
           ),
           Expanded(
             child: _registeredExpenses.isEmpty
