@@ -26,7 +26,11 @@ class _NewExpense extends State<NewExpense> {
         firstDate: firstDate,
         lastDate: now,
         initialDate: now);
-    _pickedDate = pickedDate;
+    if (pickedDate != null) {
+     setState(() {
+        _pickedDate = pickedDate;
+     });
+    }
   }
 
   Future _submitExpenseData() async {
